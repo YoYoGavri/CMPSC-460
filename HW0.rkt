@@ -1,0 +1,54 @@
+#lang plait
+
+
+(define option 'extra)
+
+(require sort)
+
+#|PROBLEM 1
+returns a list containing n copies of x|#
+(define (duple n x)
+  (if (< n 1) '() ; if equal to zero, return empty
+      (cons x (duple (sub1 n) x)))) ; else,recursively subtract one from the n var until n is 0
+
+(test (duple 2 3)
+      '(3 3))
+(test (duple 4 '(ha ha))
+      '((ha ha) (ha ha) (ha ha) (ha ha)))
+(test (duple 0 '(word))
+      '())
+(test (duple -1 '(word))
+      '())
+
+#|PROBLEM 2
+return a sorted list of integers based on operator
+less than < ascending
+greater than > descending
+> |#
+(define (merge [op : (Number Number -> Boolean)]
+               [int-list1 : (Listof Number)]
+               [int-list2 : (Listof Number)]) : (Listof Number)
+  ;Racket friendly code :/
+;  (cond
+;    [(equal? op "<") (sort (append int-list1 int-list2))]
+;    [(equal? op ">") (sort (append int-list1 int-list2) >)]
+;    [else "Invalid operator. Please use '<' for ascending or '>' for descending."]))
+
+;(test (merge < '(1 4 6) '(2 5 8))
+;      '(1 2 4 5 6 8))
+;(test (merge > '(6 4 1) '(8 5 2))
+;      '(8 6 5 4 2 1))
+
+#|Problem 3
+return an association list from a list of symbols and a list of numbers
+define a type to allow for the output of a list of associations
+?_t is to be replaced with your appropriately named type   |#
+;(define-type ...  )
+
+;(define (make-assoc [names : (Listof Symbol)] [values : (Listof Number)]): (Listof ?_t)
+;    ....)
+;
+;(test (make-assoc '(a b c d) '(1 2 3 4))
+;      '((?_t 'a 1) (?_t 'b 2) (?_t 'c 3) (?_t 'd 4)))
+;(test (make-assoc '(t a c o tuesday) '(0 1 34 1729 42))
+;      '((?_t 't 0) (?_t 'a 1) (?_t 'c 34) (?_t 'o 1729) (?_t 'tuesday 42)))

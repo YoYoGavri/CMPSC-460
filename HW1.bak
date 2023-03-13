@@ -1,0 +1,27 @@
+#lang plait
+
+;Part 1 - Super Jank, couldn't add 3 values, had to do 2 + 1
+(define-type Tree 
+  (leaf [val : Number]) 
+  (node [val : Number] 
+        [left : Tree] 
+        [right : Tree])) 
+
+(define (sum tree)
+  (cond [(leaf? tree) (leaf-val tree)]
+        [(node? tree) (+(+ (node-val tree) (sum (node-left tree))) (sum (node-right tree)))]))
+
+;Part 2 - Pain
+(define (negate tree)
+  (cond [(leaf? tree) (leaf (* (leaf-val tree) -1))]
+        [(node? tree) (node (* (node-val tree) -1) (negate (node-left tree)) (negate (node-right tree)))]))
+
+;Part 3 - (define (pain) "Very much pain, yes")
+(define (contains? tree number)
+  (cond
+    [(leaf? tree) (= (leaf-val tree) number)]
+    [(node? tree) (or (contains? (node-left tree) number) (contains? (node-right tree) number))]))
+
+;Part 4 -
+;(define (big-leaves? tree)
+;  (
